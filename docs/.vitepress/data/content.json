@@ -1,0 +1,559 @@
+{
+  "officialDomains": [
+    {
+      "name": "机器人系统工程",
+      "english": "Robotic Systems Engineering",
+      "source": "https://ra.nju.edu.cn/xygk/xyjj/"
+    },
+    {
+      "name": "复杂系统的精密控制与运维",
+      "english": "Precision Control & Operations",
+      "source": "https://ra.nju.edu.cn/xygk/xyjj/"
+    },
+    {
+      "name": "智能无人系统",
+      "english": "Intelligent Unmanned Systems",
+      "source": "https://ra.nju.edu.cn/xygk/xyjj/"
+    },
+    {
+      "name": "控制理论与应用",
+      "english": "Control Theory & Applications",
+      "source": "https://ra.nju.edu.cn/xygk/xyjj/"
+    }
+  ],
+  "editorialDomains": [
+    {
+      "id": "embodied",
+      "label": "学习与具身智能",
+      "shortLabel": "智能学习",
+      "english": "Learning & Embodied Intelligence",
+      "summary": "从强化学习、多模态感知到 VLA、世界模型与人机融合，关注智能体如何在环境反馈中学习与行动。",
+      "tags": ["强化学习", "具身智能", "多模态与 VLA", "机器视觉", "大模型决策", "人机融合"],
+      "animation": "loop"
+    },
+    {
+      "id": "autonomy",
+      "label": "自主机器人",
+      "shortLabel": "自主机器人",
+      "english": "Autonomous Robotics",
+      "summary": "覆盖运动规划、自主导航、无人机与集群、多机器人协同，以及机械臂和足式机器人系统。",
+      "tags": ["运动规划", "自主导航", "多机器人协同", "无人机与集群", "足式机器人", "无人驾驶"],
+      "animation": "path"
+    },
+    {
+      "id": "safety",
+      "label": "控制与安全",
+      "shortLabel": "控制安全",
+      "english": "Control & Safety",
+      "summary": "研究鲁棒与安全控制、网络化系统、CPS 安全隐私、容错诊断与安全关键自主系统。",
+      "tags": ["鲁棒控制", "安全可信控制", "CPS 安全", "容错诊断", "混杂系统", "形式化验证"],
+      "animation": "barrier"
+    },
+    {
+      "id": "optimization",
+      "label": "优化与预测",
+      "shortLabel": "优化预测",
+      "english": "Optimization & Prediction",
+      "summary": "连接数值优化、模型预测控制、随机控制与滤波、物理信息学习、模型辨识与降阶。",
+      "tags": ["数值与全局优化", "模型预测控制", "随机控制", "非线性滤波", "PINN", "模型辨识与降阶"],
+      "animation": "horizon"
+    },
+    {
+      "id": "industry",
+      "label": "工业与能源",
+      "shortLabel": "工业能源",
+      "english": "Industry & Energy",
+      "summary": "面向智能运维、故障诊断、设备健康、储能电池、新能源电网与过程系统等真实场景。",
+      "tags": ["智能运维", "健康管理", "储能电池", "新能源电网", "过程系统", "工业智能"],
+      "animation": "health"
+    },
+    {
+      "id": "equipment",
+      "label": "机电与装备",
+      "shortLabel": "机电装备",
+      "english": "Mechatronics & Equipment",
+      "summary": "关注机器人关节与驱动、电推进和电力电子，以及半导体、光电跟踪等高端精密装备。",
+      "tags": ["机器人关节电机", "电推进", "电力电子", "半导体装备", "超精密控制", "光电跟踪"],
+      "animation": "joint"
+    }
+  ],
+  "faculty": [
+    {
+      "id": "zhou-kemin",
+      "name": "周克敏",
+      "role": "faculty",
+      "title": "教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["鲁棒控制", "多目标优化控制", "模型与控制器降阶", "滞环非线性系统", "故障诊断与容错控制"],
+      "domainIds": ["safety", "optimization", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335910.html", "kind": "official"},
+        {"label": "个人主页", "url": "https://www.ece.lsu.edu/kemin/", "kind": "personal"},
+        {"label": "论文清单", "url": "https://www.ece.lsu.edu/kemin/publications.htm", "kind": "personal"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhou-donghua",
+      "name": "周东华",
+      "role": "faculty",
+      "title": "兼职教授",
+      "appointmentType": "part_time",
+      "isPartTime": true,
+      "officialDirections": ["动态系统故障诊断", "运行安全性评估"],
+      "domainIds": ["safety", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335912.html", "kind": "official"},
+        {"label": "清华主页", "url": "https://www.au.tsinghua.edu.cn/en/info/1110/3147.htm", "kind": "personal"},
+        {"label": "DBLP", "url": "https://dblp.org/pid/21/679", "kind": "dblp"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "chen-chunlin",
+      "name": "陈春林",
+      "role": "faculty",
+      "title": "教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["强化学习", "智能机器人", "无人驾驶", "复杂系统建模仿真与控制"],
+      "domainIds": ["embodied", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251120/i352846.html", "kind": "official"},
+        {"label": "DBLP", "url": "https://dblp.org/pid/68/6992-1.html", "kind": "dblp"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "li-huaxiong",
+      "name": "李华雄",
+      "role": "faculty",
+      "title": "教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["模式识别", "机器学习与数据挖掘", "机器人多模态学习与控制", "机器人视觉"],
+      "domainIds": ["embodied", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251121/i352917.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "lu-weimin",
+      "name": "鲁为民",
+      "role": "faculty",
+      "title": "顾问教授（兼职）",
+      "appointmentType": "part_time",
+      "isPartTime": true,
+      "officialDirections": ["自动控制", "机器学习与强化学习", "云计算", "经典及生成式人工智能", "技术产业化"],
+      "domainIds": ["embodied", "safety", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251204/i353737.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhu-bo",
+      "name": "朱波",
+      "role": "faculty",
+      "title": "长聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["集群系统调控", "复杂机器人导航与控制", "高精度鲁棒控制", "模型辨识与约简"],
+      "domainIds": ["autonomy", "safety", "optimization"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335916.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "chen-jianqi",
+      "name": "陈建琪",
+      "role": "faculty",
+      "title": "准聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["网络化系统控制", "信息物理系统安全", "鲁棒控制", "学习与控制", "机械臂协同"],
+      "domainIds": ["safety", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335914.html", "kind": "official"},
+        {"label": "个人主页", "url": "https://chenjianqi.github.io/jianqichenweb/", "kind": "personal"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "yang-boyuan",
+      "name": "杨博渊",
+      "role": "faculty",
+      "title": "准聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["机械设备监测", "故障诊断与寿命预测", "机器人多模态学习与控制", "机器学习与信号处理"],
+      "domainIds": ["industry", "embodied"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335915.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhao-di",
+      "name": "赵迪",
+      "role": "faculty",
+      "title": "准聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["鲁棒与安全控制", "多模态学习", "医学图像与图像处理"],
+      "domainIds": ["safety", "embodied"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335913.html", "kind": "official"},
+        {"label": "个人主页", "url": "https://eddy-dz.github.io/", "kind": "personal"},
+        {"label": "Google Scholar", "url": "https://scholar.google.com/citations?hl=en&user=PHMJIw4AAAAJ", "kind": "scholar"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "xu-xin",
+      "name": "许鑫",
+      "role": "faculty",
+      "title": "副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["机器学习", "局部与全局优化", "物理信息神经网络", "高维模型表示"],
+      "domainIds": ["optimization", "embodied"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251119/i352813.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "wang-zhi",
+      "name": "王志",
+      "role": "faculty",
+      "title": "准聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["强化学习", "具身智能", "强化学习基础模型", "面向大模型的强化学习微调", "视觉—语言—动作模型"],
+      "domainIds": ["embodied", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251119/i352803.html", "kind": "official"},
+        {"label": "个人主页", "url": "https://heyuanmingong.github.io/", "kind": "personal"},
+        {"label": "Google Scholar", "url": "https://scholar.google.com/citations?hl=en&user=cRXlxYcAAAAJ", "kind": "scholar"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "tong-xin",
+      "name": "童鑫",
+      "role": "faculty",
+      "title": "准聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["混杂反馈控制", "机器人规划与控制", "多智能体协同", "复杂网络生成"],
+      "domainIds": ["autonomy", "safety"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335924.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "yan-hao",
+      "name": "闫浩",
+      "role": "faculty",
+      "title": "准聘副教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["机器人关节电机与控制", "电动飞行器推进", "多端口电力电子变压器"],
+      "domainIds": ["equipment", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20260403/i371555.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhang-jianqiang",
+      "name": "张建强",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["半导体装备与超精密控制", "光电跟踪", "图像检测与目标识别"],
+      "domainIds": ["equipment", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335926.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "fu-rui",
+      "name": "付瑞",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["随机控制", "随机热动力学", "数学物理", "最优运输", "非线性滤波"],
+      "domainIds": ["optimization", "safety"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335925.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhou-xiaobin",
+      "name": "周小彬",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["空中机器人设计", "运动规划", "自主导航", "控制系统", "集群机器人"],
+      "domainIds": ["autonomy", "equipment"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335921.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhang-junhui",
+      "name": "张君会",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["控制与优化", "人工智能与形式化验证", "安全关键自主系统", "机器人与自动驾驶", "电力系统"],
+      "domainIds": ["safety", "optimization", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335923.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "lu-yang",
+      "name": "路洋",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["信息物理隐私与安全", "多机器人协同控制与优化", "联邦学习", "安全强化学习"],
+      "domainIds": ["safety", "autonomy", "embodied"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335920.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "wang-dan",
+      "name": "王丹",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["复杂系统智能控制", "鲁棒控制与相位理论", "网络科学", "多智能体协同", "新能源电网"],
+      "domainIds": ["safety", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335918.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "ma-yingjie",
+      "name": "马英杰",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["过程系统", "非线性与动态优化", "混合整数优化", "模型预测控制", "机器学习与先进制造"],
+      "domainIds": ["optimization", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335919.html", "kind": "official"},
+        {"label": "个人主页", "url": "https://eaglema.github.io/", "kind": "personal"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "wei-jingwen",
+      "name": "魏婧雯",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["储能电池健康评估", "故障诊断与寿命预测", "强化学习与迁移学习控制", "安全鲁棒强化学习"],
+      "domainIds": ["industry", "optimization", "safety"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251125/i353102.html", "kind": "official"},
+        {"label": "DBLP", "url": "https://dblp.org/pid/216/3941.html", "kind": "dblp"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "sun-yuxiang",
+      "name": "孙宇祥",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["具身智能", "人机融合", "智能博弈与决策", "深度强化学习", "大模型决策"],
+      "domainIds": ["embodied", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251119/i352800.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "mei-wenjie",
+      "name": "梅文杰",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["复杂系统建模分析与控制", "数据驱动与几何控制", "系统安全", "人工智能与机器人交叉"],
+      "domainIds": ["safety", "optimization", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20250901/i335917.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "lv-shangke",
+      "name": "吕尚可",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["机器人运动控制", "强化学习", "扩散策略与 VLA", "世界模型", "足式机器人", "人机交互与具身智能"],
+      "domainIds": ["embodied", "autonomy", "safety"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20251119/i352806.html", "kind": "official"},
+        {"label": "个人主页", "url": "https://lsk-robot.github.io/", "kind": "personal"},
+        {"label": "DBLP", "url": "https://dblp.org/pid/226/6149.html", "kind": "dblp"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "gao-yan",
+      "name": "高岩",
+      "role": "faculty",
+      "title": "助理教授",
+      "appointmentType": "not_marked_part_time",
+      "isPartTime": false,
+      "officialDirections": ["无人机集群协同", "多机器人安全控制", "运动规划", "抗扰控制"],
+      "domainIds": ["autonomy", "safety"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzjs/20260407/i372033.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "tang-kaiqiang",
+      "name": "唐开强",
+      "role": "research_staff",
+      "title": "专职科研人员",
+      "appointmentType": "research_staff",
+      "isPartTime": false,
+      "officialDirections": ["机器学习", "智能机器人", "智能交通", "多足仿生机器人"],
+      "domainIds": ["embodied", "autonomy"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzky/20250902/i335992.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "wang-zhen",
+      "name": "王振",
+      "role": "research_staff",
+      "title": "专职科研人员",
+      "appointmentType": "research_staff",
+      "isPartTime": false,
+      "officialDirections": ["激光通信", "光学检测系统控制计算与优化", "工业光机电装备"],
+      "domainIds": ["equipment", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzky/20250902/i336007.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "zhang-chao",
+      "name": "章超",
+      "role": "research_staff",
+      "title": "专职科研人员",
+      "appointmentType": "research_staff",
+      "isPartTime": false,
+      "officialDirections": ["机器学习", "模式识别", "多模态", "计算机视觉", "工业智能"],
+      "domainIds": ["embodied", "industry"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzky/20260518/i390186.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "wang-miao",
+      "name": "汪秒",
+      "role": "research_staff",
+      "title": "专职科研人员",
+      "appointmentType": "research_staff",
+      "isPartTime": false,
+      "officialDirections": ["低空智能装备", "无人系统构型", "鲁棒控制", "自主导航", "集群具身智能"],
+      "domainIds": ["autonomy", "safety", "embodied"],
+      "links": [
+        {"label": "学院官网", "url": "https://ra.nju.edu.cn/szll/zzky/20260518/i390194.html", "kind": "official"}
+      ],
+      "lastVerified": "2026-08-27"
+    }
+  ],
+  "courses": [
+    {
+      "id": "data-structures-robotics",
+      "courseCode": "51010010",
+      "name": "数据结构与算法设计（机器人）",
+      "term": "2025–2026 学年第二学期",
+      "instructors": ["杨佩"],
+      "credits": null,
+      "assessment": "学院公开教材选用表未列学分与考核方式，请以当学期教学大纲为准。",
+      "officialSource": "https://ra.nju.edu.cn/DFS/file/2026/02/26/20260226112453278bvgejk.pdf",
+      "resourceLinks": [],
+      "experienceStatus": "暂无投稿",
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "intro-robotics-automation",
+      "courseCode": "51010020",
+      "name": "机器人与自动化导论（机器人）",
+      "term": "2025–2026 学年第二学期",
+      "instructors": ["陈春林"],
+      "credits": null,
+      "assessment": "学院公开教材选用表未列学分与考核方式，请以当学期教学大纲为准。",
+      "officialSource": "https://ra.nju.edu.cn/DFS/file/2026/02/26/20260226112453278bvgejk.pdf",
+      "resourceLinks": [],
+      "experienceStatus": "暂无投稿",
+      "lastVerified": "2026-08-27"
+    }
+  ],
+  "projects": [
+    {
+      "id": "natural-behavior-robot-dog-cctv",
+      "kind": "student_practice",
+      "title": "自然行为学习机器狗 · 四足敏捷挑战",
+      "status": "已公开展示",
+      "summary": "学院与工程管理学院师生共同研发的机器狗以强化学习、模仿学习与集成控制完成自主感知、决策、规划和越障，并在 CCTV-10 节目中公开展示。",
+      "participation": "公开报道未列常态化招募条件；本科生参与了机器人调试、实验设计与数据分析。",
+      "lead": "陈春林、唐开强及学生团队",
+      "team": ["傅汇乔", "邓归洲", "董浩宇", "许文涛", "周哲昊", "段宇豪", "袁熙旺"],
+      "date": "2025-12-01",
+      "source": "https://ra.nju.edu.cn/xydt/xwdt/20251203/i353452.html",
+      "lastVerified": "2026-08-27"
+    },
+    {
+      "id": "quadruped-natural-behaviors",
+      "kind": "research_project",
+      "title": "四足机器人多样化自然行为学习",
+      "status": "已发表",
+      "summary": "面向复杂环境敏捷运动，团队将自然行为学习、视觉决策控制与仿真到现实迁移整合为一体化控制框架。",
+      "participation": "公开成果页未发布招募信息；建议先阅读成果介绍与论文，再通过导师官网渠道联系。",
+      "lead": "陈春林、唐开强",
+      "team": ["傅汇乔", "董浩宇", "许文涛", "周哲浩", "邓归洲"],
+      "date": "2026-05-26",
+      "source": "https://ra.nju.edu.cn/kxyj/cgzh/20260526/i392832.html",
+      "paperUrl": "https://doi.org/10.1038/s41467-026-72475-9",
+      "lastVerified": "2026-08-27"
+    }
+  ]
+}

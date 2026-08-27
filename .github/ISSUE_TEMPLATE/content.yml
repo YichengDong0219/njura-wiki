@@ -1,0 +1,40 @@
+name: 内容纠错或补充
+description: 报告事实错误、失效链接或提交内容线索
+title: "[内容] "
+labels:
+  - content
+body:
+  - type: dropdown
+    id: section
+    attributes:
+      label: 所属板块
+      options:
+        - 项目介绍
+        - 课程介绍
+        - 师资百科
+        - 科研指南
+        - 学法分享
+        - 资料库与其他
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题或建议
+      description: 请说明当前内容与建议修改。
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 可核验来源
+      description: 优先填写学校、学院、教师本人主页或 DOI 链接。
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: 版权与隐私
+      options:
+        - label: 我没有提交私人信息或未获授权的第三方文件。
+          required: true

@@ -1,0 +1,26 @@
+{
+  "name": "njura-wiki",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@11.17.0",
+  "type": "module",
+  "description": "南京大学机器人与自动化学院非官方学生 Wiki",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "node scripts/validate-content.mjs && npm run typecheck && vitepress build docs && npm run check:site",
+    "docs:preview": "vitepress preview docs",
+    "check:site": "node scripts/check-built-site.mjs",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "validate": "node scripts/validate-content.mjs",
+    "check": "npm run docs:build"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || ^24.0.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vitepress": "1.6.4",
+    "vue": "^3.5.13",
+    "vue-tsc": "3.3.11"
+  }
+}

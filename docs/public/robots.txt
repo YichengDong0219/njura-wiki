@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yichengdong0219.github.io/njura-wiki/sitemap.xml
