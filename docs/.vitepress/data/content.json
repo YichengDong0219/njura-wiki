@@ -509,7 +509,13 @@
       "credits": null,
       "assessment": "学院公开教材选用表未列学分与考核方式，请以当学期教学大纲为准。",
       "officialSource": "https://ra.nju.edu.cn/DFS/file/2026/02/26/20260226112453278bvgejk.pdf",
-      "resourceLinks": [],
+      "resourceLinks": [
+        {
+          "label": "前往课程资料库",
+          "url": "https://github.com/YichengDong0219/njura-resources"
+        }
+      ],
+      "detailPath": "/courses/data-structures-robotics/",
       "experienceStatus": "暂无投稿",
       "lastVerified": "2026-08-27"
     },

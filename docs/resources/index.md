@@ -21,7 +21,7 @@ courses/
             ├── notes/
             ├── slides/
             ├── exams/
-            └── metadata.yml
+            └── metadata.json
 ```
 
 每批文件都必须有来源、权利人、授权说明、贡献者和适用学期。没有授权资料时，仓库保持为空内容骨架。

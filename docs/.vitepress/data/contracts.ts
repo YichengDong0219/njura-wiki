@@ -35,7 +35,42 @@ export interface CourseEntry {
   assessment: string
   officialSource: string
   resourceLinks: Array<{ label: string; url: string }>
+  detailPath?: string
   experienceStatus: '暂无投稿' | '已有投稿'
+  lastVerified: string
+}
+
+export type CourseStageId = 'foundations' | 'nonlinear' | 'search-and-sort'
+
+export interface CourseChapterSection {
+  label: string
+  summary: string
+}
+
+export interface CourseChapter {
+  number: string
+  title: string
+  summary: string
+  topics: string[]
+  sections?: CourseChapterSection[]
+}
+
+export interface CourseStage {
+  id: CourseStageId
+  index: string
+  title: string
+  english: string
+  summary: string
+  chapters: CourseChapter[]
+}
+
+export interface CourseOutline {
+  courseId: string
+  english: string
+  introduction: string
+  learningLenses: Array<{ label: string; description: string }>
+  stages: CourseStage[]
+  missingChapters: Array<{ number: string; note: string }>
   lastVerified: string
 }
 

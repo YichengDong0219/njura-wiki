@@ -98,6 +98,7 @@ export default defineConfig({
       '/courses/': [
         { text: '课程介绍', items: [
           { text: '课程索引', link: '/courses/' },
+          { text: '数据结构与算法设计', link: '/courses/data-structures-robotics/' },
           { text: '课程投稿模板', link: '/courses/template/' }
         ] }
       ],

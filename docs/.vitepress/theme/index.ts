@@ -1,6 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
 import Layout from './Layout.vue'
+import CourseDetail from './components/CourseDetail.vue'
 import CourseIndex from './components/CourseIndex.vue'
 import DomainDetail from './components/DomainDetail.vue'
 import FacultyDirectory from './components/FacultyDirectory.vue'
@@ -14,6 +15,7 @@ export default {
   extends: DefaultTheme,
   Layout,
   enhanceApp({ app }) {
+    app.component('CourseDetail', CourseDetail)
     app.component('CourseIndex', CourseIndex)
     app.component('DomainDetail', DomainDetail)
     app.component('FacultyDirectory', FacultyDirectory)

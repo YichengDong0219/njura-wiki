@@ -5,7 +5,11 @@ import { fileURLToPath } from 'node:url'
 const projectRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dataPath = join(projectRoot, 'docs/.vitepress/data/content.json')
 const data = JSON.parse(readFileSync(dataPath, 'utf8'))
+const courseOutlinesPath = join(projectRoot, 'docs/.vitepress/data/course-outlines.json')
+const courseOutlines = JSON.parse(readFileSync(courseOutlinesPath, 'utf8'))
 const errors = []
+const resourceRepositoryUrl = 'https://github.com/YichengDong0219/njura-resources'
+const forbiddenResourceExtension = /\.(?:pdf|pptx?|docx?)(?:$|[?#])/i
 
 function assert(condition, message) {
   if (!condition) errors.push(message)
@@ -35,6 +39,7 @@ assertUnique(data.editorialDomains, '研究方向')
 assertUnique(data.faculty, '人员')
 assertUnique(data.courses, '课程')
 assertUnique(data.projects, '项目')
+assertUnique(courseOutlines.map((outline) => ({ ...outline, id: outline.courseId })), '课程大纲')
 
 const teachers = data.faculty.filter((person) => person.role === 'faculty')
 const researchStaff = data.faculty.filter((person) => person.role === 'research_staff')
@@ -74,8 +79,47 @@ for (const course of data.courses) {
   assert(course.courseCode && course.name && course.term, `课程字段不完整：${course.id}`)
   assert(Array.isArray(course.instructors) && course.instructors.length > 0, `${course.name} 缺少教师`)
   assert(isHttpsUrl(course.officialSource), `${course.name} 缺少有效官方来源`)
+  assert(Array.isArray(course.resourceLinks), `${course.name} 的资料链接必须为数组`)
+  for (const link of course.resourceLinks ?? []) {
+    assert(link.label && isHttpsUrl(link.url), `${course.name} 包含无效资料链接`)
+    assert(!forbiddenResourceExtension.test(link.url), `${course.name} 不得直接链接课程文件：${link.url}`)
+  }
+  if (course.detailPath) {
+    const detailDirectory = course.detailPath.replace(/^\/+|\/+$/g, '')
+    assert(course.detailPath.startsWith('/courses/') && course.detailPath.endsWith('/'), `${course.name} 的详情路径无效`)
+    assert(course.detailPath === `/courses/${course.id}/`, `${course.name} 的课程 ID 必须与详情路由一致`)
+    assert(existsSync(join(projectRoot, 'docs', detailDirectory, 'index.md')), `${course.name} 缺少课程详情页`)
+    assert(course.resourceLinks.length === 1, `${course.name} 必须且只能配置一个资料库入口`)
+    assert(course.resourceLinks[0]?.url === resourceRepositoryUrl, `${course.name} 的资料入口必须指向指定仓库`)
+    assert(courseOutlines.some((outline) => outline.courseId === course.id), `${course.name} 缺少课程知识地图`)
+  }
   assert(['暂无投稿', '已有投稿'].includes(course.experienceStatus), `${course.name} 的经验状态无效`)
   assert(isIsoDate(course.lastVerified), `${course.name} 的核验日期无效`)
+}
+
+for (const outline of courseOutlines) {
+  const course = data.courses.find((item) => item.id === outline.courseId)
+  const stages = Array.isArray(outline.stages) ? outline.stages : []
+  assert(Boolean(course), `课程知识地图引用了未知课程：${outline.courseId}`)
+  assert(Array.isArray(outline.learningLenses) && outline.learningLenses.length === 4, `${outline.courseId} 必须包含四个学习视角`)
+  assert(stages.length === 3, `${outline.courseId} 必须包含三个学习阶段`)
+  assert(stages.map((stage) => stage.id).join(',') === 'foundations,nonlinear,search-and-sort', `${outline.courseId} 的学习阶段顺序无效`)
+  for (const stage of stages) {
+    assert(stage.index && stage.title && stage.english && stage.summary, `${outline.courseId} 的 ${stage.id} 阶段字段不完整`)
+  }
+  const chapters = stages.flatMap((stage) => stage.chapters ?? [])
+  const chapterNumbers = chapters.map((chapter) => chapter.number)
+  assert(new Set(chapterNumbers).size === chapterNumbers.length, `${outline.courseId} 的章节号必须唯一`)
+  assert(chapterNumbers.join(',') === '1,2,3,4,5,6,7,9,10', `${outline.courseId} 的章节顺序必须为 1–7、9、10`)
+  for (const chapter of chapters) {
+    assert(chapter.title && chapter.summary && Array.isArray(chapter.topics) && chapter.topics.length > 0, `${outline.courseId} 的第 ${chapter.number} 章字段不完整`)
+  }
+  const chapterSix = chapters.find((chapter) => chapter.number === '6')
+  assert(chapterSix?.sections?.length === 3, `${outline.courseId} 的第 6 章必须包含三个子阶段`)
+  assert(chapterSix?.sections?.every((section) => section.label && section.summary), `${outline.courseId} 的第 6 章子阶段字段不完整`)
+  assert(outline.missingChapters?.length === 1 && outline.missingChapters[0]?.number === '8', `${outline.courseId} 必须明确标注第 8 章缺失`)
+  assert(isIsoDate(outline.lastVerified), `${outline.courseId} 的知识地图核验日期无效`)
+  assert(!forbiddenResourceExtension.test(JSON.stringify(outline)), `${outline.courseId} 的知识地图不得包含课程文件路径`)
 }
 
 assert(data.projects.some((project) => project.kind === 'student_practice'), '至少需要一个学生实践项目')
@@ -97,4 +141,4 @@ if (errors.length) {
   process.exit(1)
 }
 
-console.log(`内容校验通过：${teachers.length} 个教师档案、${researchStaff.length} 位专职科研人员、${data.editorialDomains.length} 类方向、${data.courses.length} 门课程、${data.projects.length} 个项目。`)
+console.log(`内容校验通过：${teachers.length} 个教师档案、${researchStaff.length} 位专职科研人员、${data.editorialDomains.length} 类方向、${data.courses.length} 门课程、${courseOutlines.length} 份课程知识地图、${data.projects.length} 个项目。`)
