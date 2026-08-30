@@ -50,7 +50,7 @@ function profilePath(person: FacultyRecord) {
     <section v-if="teachers.length" aria-labelledby="faculty-heading">
       <div class="directory-heading">
         <div>
-          <p class="section-kicker">FACULTY PROFILES</p>
+          <p class="section-kicker">人员分类</p>
           <h2 id="faculty-heading">教师档案</h2>
         </div>
         <span>{{ teachers.length }} 人</span>
@@ -59,7 +59,7 @@ function profilePath(person: FacultyRecord) {
         <article v-for="person in teachers" :key="person.id" class="faculty-card">
           <div class="faculty-card__top">
             <div>
-              <h3><a :href="profilePath(person)">{{ person.name }}</a></h3>
+              <h3>{{ person.name }}</h3>
               <p>{{ person.title }}</p>
             </div>
             <span v-if="person.isPartTime" class="status-badge">兼职</span>
@@ -76,7 +76,7 @@ function profilePath(person: FacultyRecord) {
     <section v-if="researchStaff.length" aria-labelledby="research-staff-heading">
       <div class="directory-heading">
         <div>
-          <p class="section-kicker">RESEARCH STAFF</p>
+          <p class="section-kicker">人员分类</p>
           <h2 id="research-staff-heading">专职科研人员</h2>
         </div>
         <span>{{ researchStaff.length }} 人</span>
@@ -85,7 +85,7 @@ function profilePath(person: FacultyRecord) {
         <article v-for="person in researchStaff" :key="person.id" class="faculty-card">
           <div class="faculty-card__top">
             <div>
-              <h3><a :href="profilePath(person)">{{ person.name }}</a></h3>
+              <h3>{{ person.name }}</h3>
               <p>{{ person.title }}</p>
             </div>
           </div>

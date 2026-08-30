@@ -10,7 +10,7 @@ const projects = computed(() => data.projects.filter((project) => project.kind =
 
 <template>
   <div class="project-list">
-    <article v-for="project in projects" :key="project.id" class="project-card">
+    <article v-for="project in projects" :id="`project-${project.id}`" :key="project.id" class="project-card">
       <div class="project-card__meta">
         <span>{{ project.status }}</span>
         <time :datetime="project.date">{{ project.date }}</time>

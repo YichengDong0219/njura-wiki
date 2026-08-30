@@ -65,6 +65,33 @@ for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8')
   const relative = path.relative(outputDir, file)
 
+  if (relative === 'index.html') {
+    for (const label of ['查课程', '按方向找老师', '看同学做过什么', '第一次进实验室', '找一条可走的学习路径']) {
+      if (!html.includes(label)) errors.push(`index.html: 缺少首页入口“${label}”`)
+    }
+    if (html.includes('research-canvas')) errors.push('index.html: 首页不应再渲染多路 Canvas')
+    if (!html.includes('class="research-loop"')) errors.push('index.html: 缺少单一研究反馈环')
+  }
+
+  if (relative === path.join('research', 'map', 'index.html')) {
+    const mainHeadings = [...html.matchAll(/<h1\b/g)].length
+    if (mainHeadings !== 1) errors.push(`research/map/index.html: 应有且仅有一个 h1，当前为 ${mainHeadings}`)
+  }
+
+  if (relative === path.join('courses', 'data-structures-robotics', 'index.html')) {
+    if (!html.includes('data-course-resources-state="empty"')) {
+      errors.push('courses/data-structures-robotics/index.html: 缺少课程资料空状态')
+    }
+    if (html.includes('github.com/YichengDong0219/njura-resources')) {
+      errors.push('courses/data-structures-robotics/index.html: 不应出现未开放的资料仓库链接')
+    }
+    for (const match of html.matchAll(/\b(?:href|src)=(['"])(.*?)\1/g)) {
+      if (/\.(?:pdf|pptx?|docx?)(?:$|[?#])/i.test(match[2])) {
+        errors.push(`courses/data-structures-robotics/index.html: 不应出现课程文件链接 ${match[2]}`)
+      }
+    }
+  }
+
   if (!/<link rel="canonical" href="[^"]+">/.test(html)) {
     errors.push(`${relative}: 缺少 canonical`)
   }
@@ -105,6 +132,16 @@ for (const file of htmlFiles) {
 const sitemap = await readFile(path.join(outputDir, 'sitemap.xml'), 'utf8')
 if (sitemap.includes('404.html')) {
   errors.push('sitemap.xml: 不应收录 404.html')
+}
+
+const searchIndexFiles = files.filter((file) => path.basename(file).startsWith('@localSearchIndex'))
+if (!searchIndexFiles.length) {
+  errors.push('本地搜索索引缺失')
+} else {
+  const searchIndexSource = (await Promise.all(searchIndexFiles.map((file) => readFile(file, 'utf8')))).join('\n')
+  for (const term of ['陈春林', '汪秒', '数据结构与算法设计（机器人）', '自然行为学习机器狗', '学习与具身智能']) {
+    if (!searchIndexSource.includes(term)) errors.push(`本地搜索索引缺少“${term}”`)
+  }
 }
 
 if (errors.length) {

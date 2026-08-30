@@ -29,7 +29,11 @@
       "english": "Learning & Embodied Intelligence",
       "summary": "从强化学习、多模态感知到 VLA、世界模型与人机融合，关注智能体如何在环境反馈中学习与行动。",
       "tags": ["强化学习", "具身智能", "多模态与 VLA", "机器视觉", "大模型决策", "人机融合"],
-      "animation": "loop"
+      "atlas": {
+        "order": 1,
+        "icon": "learning",
+        "stageIds": ["perception", "planning", "feedback"]
+      }
     },
     {
       "id": "autonomy",
@@ -38,7 +42,11 @@
       "english": "Autonomous Robotics",
       "summary": "覆盖运动规划、自主导航、无人机与集群、多机器人协同，以及机械臂和足式机器人系统。",
       "tags": ["运动规划", "自主导航", "多机器人协同", "无人机与集群", "足式机器人", "无人驾驶"],
-      "animation": "path"
+      "atlas": {
+        "order": 2,
+        "icon": "route",
+        "stageIds": ["perception", "planning", "execution"]
+      }
     },
     {
       "id": "safety",
@@ -47,7 +55,11 @@
       "english": "Control & Safety",
       "summary": "研究鲁棒与安全控制、网络化系统、CPS 安全隐私、容错诊断与安全关键自主系统。",
       "tags": ["鲁棒控制", "安全可信控制", "CPS 安全", "容错诊断", "混杂系统", "形式化验证"],
-      "animation": "barrier"
+      "atlas": {
+        "order": 3,
+        "icon": "shield",
+        "stageIds": ["control", "feedback"]
+      }
     },
     {
       "id": "optimization",
@@ -56,7 +68,11 @@
       "english": "Optimization & Prediction",
       "summary": "连接数值优化、模型预测控制、随机控制与滤波、物理信息学习、模型辨识与降阶。",
       "tags": ["数值与全局优化", "模型预测控制", "随机控制", "非线性滤波", "PINN", "模型辨识与降阶"],
-      "animation": "horizon"
+      "atlas": {
+        "order": 4,
+        "icon": "prediction",
+        "stageIds": ["planning", "control"]
+      }
     },
     {
       "id": "industry",
@@ -65,7 +81,11 @@
       "english": "Industry & Energy",
       "summary": "面向智能运维、故障诊断、设备健康、储能电池、新能源电网与过程系统等真实场景。",
       "tags": ["智能运维", "健康管理", "储能电池", "新能源电网", "过程系统", "工业智能"],
-      "animation": "health"
+      "atlas": {
+        "order": 5,
+        "icon": "pulse",
+        "stageIds": ["perception", "feedback"]
+      }
     },
     {
       "id": "equipment",
@@ -74,7 +94,11 @@
       "english": "Mechatronics & Equipment",
       "summary": "关注机器人关节与驱动、电推进和电力电子，以及半导体、光电跟踪等高端精密装备。",
       "tags": ["机器人关节电机", "电推进", "电力电子", "半导体装备", "超精密控制", "光电跟踪"],
-      "animation": "joint"
+      "atlas": {
+        "order": 6,
+        "icon": "joint",
+        "stageIds": ["control", "execution"]
+      }
     }
   ],
   "faculty": [
@@ -509,12 +533,6 @@
       "credits": null,
       "assessment": "学院公开教材选用表未列学分与考核方式，请以当学期教学大纲为准。",
       "officialSource": "https://ra.nju.edu.cn/DFS/file/2026/02/26/20260226112453278bvgejk.pdf",
-      "resourceLinks": [
-        {
-          "label": "前往课程资料库",
-          "url": "https://github.com/YichengDong0219/njura-resources"
-        }
-      ],
       "detailPath": "/courses/data-structures-robotics/",
       "experienceStatus": "暂无投稿",
       "lastVerified": "2026-08-27"
@@ -528,7 +546,6 @@
       "credits": null,
       "assessment": "学院公开教材选用表未列学分与考核方式，请以当学期教学大纲为准。",
       "officialSource": "https://ra.nju.edu.cn/DFS/file/2026/02/26/20260226112453278bvgejk.pdf",
-      "resourceLinks": [],
       "experienceStatus": "暂无投稿",
       "lastVerified": "2026-08-27"
     }

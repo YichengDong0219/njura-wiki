@@ -4,13 +4,13 @@ import { withBase } from 'vitepress'
 import content from '../../data/content.json'
 import outlines from '../../data/course-outlines.json'
 import type { ContentDatabase, CourseOutline } from '../../data/contracts'
+import CourseResourcePanel from './CourseResourcePanel.vue'
 
 const props = defineProps<{ courseId: string }>()
 const data = content as ContentDatabase
 const courseOutlines = outlines as CourseOutline[]
 const course = computed(() => data.courses.find((item) => item.id === props.courseId))
 const outline = computed(() => courseOutlines.find((item) => item.courseId === props.courseId))
-const resourceLink = computed(() => course.value?.resourceLinks[0])
 const chapterCount = computed(() => outline.value?.stages.reduce((count, stage) => count + stage.chapters.length, 0) ?? 0)
 </script>
 
@@ -22,7 +22,7 @@ const chapterCount = computed(() => outline.value?.stages.reduce((count, stage) 
 
     <header class="course-detail__hero">
       <div class="course-detail__intro">
-        <p class="section-kicker">COURSE KNOWLEDGE MAP · 编辑性整理</p>
+        <p class="section-kicker">课程知识地图 · 编辑性整理</p>
         <div class="course-detail__code">{{ course.courseCode }}</div>
         <h1>{{ course.name }}</h1>
         <p class="course-detail__english">{{ outline.english }}</p>
@@ -32,15 +32,6 @@ const chapterCount = computed(() => outline.value?.stages.reduce((count, stage) 
           <div><dt>任课教师</dt><dd>{{ course.instructors.join('、') }}</dd></div>
           <div><dt>内容范围</dt><dd>{{ chapterCount }} 个已核验章节 · 3 个学习阶段</dd></div>
         </dl>
-        <a
-          v-if="resourceLink"
-          class="course-detail__resource-link"
-          :href="resourceLink.url"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ resourceLink.label }}
-        </a>
       </div>
 
       <div class="course-structure-visual" aria-hidden="true">
@@ -63,13 +54,15 @@ const chapterCount = computed(() => outline.value?.stages.reduce((count, stage) 
     </header>
 
     <div class="source-note course-detail__source-note">
-      本页仅以文字转述课件的知识结构，不托管、嵌入或提供单份课件下载。课程安排请以当学期教学大纲为准。最后核验：{{ outline.lastVerified }}。
+      本页以文字转述课件的知识结构；资料区当前未接入文件，后续只展示获授权内容。课程安排请以当学期教学大纲为准。最后核验：{{ outline.lastVerified }}。
     </div>
+
+    <CourseResourcePanel :course-id="course.id" />
 
     <section class="course-lenses" aria-labelledby="course-lenses-title">
       <div class="course-section-heading">
         <div>
-          <p class="section-kicker">FOUR LENSES</p>
+          <p class="section-kicker">学习抓手</p>
           <h2 id="course-lenses-title">用四个问题读懂每种结构</h2>
         </div>
         <p>从“它是什么”走向“如何表示、如何操作、为什么这样选择”。</p>
@@ -86,7 +79,7 @@ const chapterCount = computed(() => outline.value?.stages.reduce((count, stage) 
     <section class="course-route" aria-labelledby="course-route-title">
       <div class="course-section-heading">
         <div>
-          <p class="section-kicker">LEARNING ROUTE</p>
+          <p class="section-kicker">学习路线</p>
           <h2 id="course-route-title">三阶段学习路线</h2>
         </div>
         <p>先建立结构视角，再进入非线性关系，最后比较检索与组织算法。</p>
@@ -109,7 +102,7 @@ const chapterCount = computed(() => outline.value?.stages.reduce((count, stage) 
     <section class="course-chapter-map" aria-labelledby="course-map-title">
       <div class="course-section-heading">
         <div>
-          <p class="section-kicker">CHAPTER MAP</p>
+          <p class="section-kicker">章节索引</p>
           <h2 id="course-map-title">章节知识地图</h2>
         </div>
         <p>章节标签是导航线索，不替代课堂讲授、教材或实验要求。</p>

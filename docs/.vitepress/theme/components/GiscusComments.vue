@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
+const props = defineProps<{ theme: 'light' | 'dark' }>()
 const host = ref<HTMLElement | null>(null)
 const repo = 'YichengDong0219/njura-wiki'
 const repoId = import.meta.env.VITE_GISCUS_REPO_ID as string | undefined
@@ -25,7 +26,7 @@ onMounted(() => {
     'data-reactions-enabled': '1',
     'data-emit-metadata': '0',
     'data-input-position': 'top',
-    'data-theme': 'preferred_color_scheme',
+    'data-theme': props.theme,
     'data-lang': 'zh-CN',
     'data-loading': 'lazy'
   }
@@ -35,12 +36,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="comments-section" aria-labelledby="comments-title">
+  <section v-if="configured" class="comments-section" aria-labelledby="comments-title">
     <h2 id="comments-title">讨论与补充</h2>
-    <div v-if="configured" ref="host" class="giscus" />
-    <div v-else class="comments-placeholder">
-      <p>评论组件已经接入，待仓库 Discussions 与「文章评论」分类启用后开放。</p>
-      <a href="https://github.com/YichengDong0219/njura-wiki/discussions" target="_blank" rel="noreferrer">前往 GitHub Discussions ↗</a>
-    </div>
+    <div ref="host" class="giscus" />
   </section>
 </template>

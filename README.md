@@ -3,12 +3,12 @@
 南京大学机器人与自动化学院学生共同维护的非官方知识站，覆盖项目、课程、师资、科研与学法五个板块。
 
 - 线上地址：<https://yichengdong0219.github.io/njura-wiki/>
-- 资料仓库：<https://github.com/YichengDong0219/njura-resources>
+- 资料入口：<https://yichengdong0219.github.io/njura-wiki/resources/>
 - 学院官网：<https://ra.nju.edu.cn/>
 
 ## 技术架构
 
-主站使用 VitePress 1.6.4 + Vue 3 构建纯静态页面，无自建后端。Markdown 承载长期内容，Vue 与 Canvas 承载研究图谱；课程大文件放在独立资料仓库。
+主站使用 VitePress 1.6.4 + Vue 3 构建纯静态页面，无自建后端。Markdown 承载长期内容，Vue 与 CSS 交互承载研究图谱；课程资料通过可替换的 provider 接口接入。
 
 ## 本地开发
 

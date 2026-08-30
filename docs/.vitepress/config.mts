@@ -1,6 +1,137 @@
 import { defineConfig } from 'vitepress'
+import content from './data/content.json'
+import courseOutlines from './data/course-outlines.json'
+import type { ContentDatabase, CourseOutline } from './data/contracts'
 
 const siteUrl = 'https://yichengdong0219.github.io/njura-wiki/'
+const database = content as ContentDatabase
+const outlines = courseOutlines as CourseOutline[]
+
+interface SearchSection {
+  anchor: string
+  titles: string[]
+  text: string
+}
+
+function defaultSearchSections(html: string): SearchSection[] {
+  const headingRegex = /<h(\d*).*?>(.*?<a.*? href="#.*?".*?>.*?<\/a>)<\/h\1>/gi
+  const headingContentRegex = /(.*?)<a.*? href="#(.*?)".*?>.*?<\/a>/i
+  const chunks = html.split(headingRegex)
+  chunks.shift()
+  const sections: SearchSection[] = []
+  let parentTitles: string[] = []
+
+  for (let index = 0; index < chunks.length; index += 3) {
+    const level = Number.parseInt(chunks[index]) - 1
+    const heading = chunks[index + 1]
+    const headingResult = headingContentRegex.exec(heading)
+    const title = (headingResult?.[1] ?? '').replace(/<[^>]*>/g, '').trim()
+    const anchor = headingResult?.[2] ?? ''
+    const sectionHtml = chunks[index + 2]
+    if (!title || !sectionHtml) continue
+
+    let titles = parentTitles.slice(0, level)
+    titles[level] = title
+    titles = titles.filter(Boolean)
+    sections.push({
+      anchor,
+      titles,
+      text: sectionHtml.replace(/<[^>]*>/g, '')
+    })
+
+    if (level === 0) parentTitles = [title]
+    else parentTitles[level] = title
+  }
+
+  return sections
+}
+
+function syntheticSearchSections(file: string): SearchSection[] {
+  const normalized = file.replaceAll('\\', '/')
+  const relative = normalized.includes('/docs/') ? normalized.split('/docs/').at(-1)! : normalized
+
+  const facultyMatch = relative.match(/^faculty\/([^/]+)\/index\.md$/)
+  if (facultyMatch) {
+    const person = database.faculty.find((item) => item.id === facultyMatch[1])
+    if (!person) return []
+    const domains = person.domainIds
+      .map((id) => database.editorialDomains.find((domain) => domain.id === id)?.label)
+      .filter(Boolean)
+    return [{
+      anchor: '',
+      titles: [person.name],
+      text: [person.title, ...person.officialDirections, ...domains].join(' ')
+    }]
+  }
+
+  const courseMatch = relative.match(/^courses\/([^/]+)\/index\.md$/)
+  if (courseMatch && courseMatch[1] !== 'template') {
+    const course = database.courses.find((item) => item.id === courseMatch[1])
+    const outline = outlines.find((item) => item.courseId === courseMatch[1])
+    if (!course) return []
+    const chapterText = outline?.stages
+      .flatMap((stage) => stage.chapters.flatMap((chapter) => [chapter.title, chapter.summary, ...chapter.topics]))
+      .join(' ') ?? ''
+    return [{
+      anchor: '',
+      titles: [course.name],
+      text: [course.courseCode, course.term, ...course.instructors, course.assessment, chapterText].join(' ')
+    }]
+  }
+
+  const directionMatch = relative.match(/^research\/directions\/([^/]+)\/index\.md$/)
+  if (directionMatch) {
+    const domain = database.editorialDomains.find((item) => item.id === directionMatch[1])
+    if (!domain) return []
+    const people = database.faculty
+      .filter((person) => person.domainIds.includes(domain.id))
+      .map((person) => person.name)
+    return [{
+      anchor: '',
+      titles: [domain.label],
+      text: [domain.english, domain.summary, ...domain.tags, ...people].join(' ')
+    }]
+  }
+
+  if (relative === 'research/map/index.md') {
+    return [{
+      anchor: '',
+      titles: ['研究图谱'],
+      text: database.editorialDomains.flatMap((domain) => [domain.label, domain.english, domain.summary, ...domain.tags]).join(' ')
+    }]
+  }
+
+  if (relative === 'courses/index.md') {
+    return database.courses
+      .filter((course) => !course.detailPath)
+      .map((course) => ({
+        anchor: `course-${course.id}`,
+        titles: [course.name],
+        text: [course.courseCode, course.term, ...course.instructors, course.assessment].join(' ')
+      }))
+  }
+
+  if (relative === 'projects/student/index.md' || relative === 'projects/research/index.md') {
+    const kind = relative.includes('/student/') ? 'student_practice' : 'research_project'
+    return database.projects
+      .filter((project) => project.kind === kind)
+      .map((project) => ({
+        anchor: `project-${project.id}`,
+        titles: [project.title],
+        text: [project.status, project.summary, project.participation, project.lead, ...project.team].join(' ')
+      }))
+  }
+
+  if (relative === 'index.md') {
+    return [{
+      anchor: '',
+      titles: ['南大机器人学生 Wiki'],
+      text: '查课程 按方向找老师 项目与竞赛 科研入门 学习经验 参与共建'
+    }]
+  }
+
+  return []
+}
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -53,6 +184,11 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
+        miniSearch: {
+          _splitIntoSections(file, html) {
+            return [...defaultSearchSections(html), ...syntheticSearchSections(file)]
+          }
+        },
         translations: {
           button: { buttonText: '搜索', buttonAriaLabel: '搜索本站' },
           modal: {
@@ -64,24 +200,22 @@ export default defineConfig({
       }
     },
     nav: [
-      { text: '首页', link: '/' },
+      { text: '课程', link: '/courses/' },
       {
-        text: '五大板块',
+        text: '教师与方向',
         items: [
-          { text: '项目介绍', link: '/projects/' },
-          { text: '课程介绍', link: '/courses/' },
-          { text: '师资百科', link: '/faculty/' },
-          { text: '科研指南', link: '/research/' },
-          { text: '学法分享', link: '/learning/' }
+          { text: '按方向浏览', link: '/research/map/' },
+          { text: '按姓名浏览', link: '/faculty/' }
         ]
       },
-      { text: '研究图谱', link: '/research/map/' },
-      { text: '师资百科', link: '/faculty/' },
+      { text: '项目与竞赛', link: '/projects/' },
+      { text: '科研入门', link: '/research/' },
+      { text: '学习经验', link: '/learning/' },
       {
         text: '共建',
         items: [
-          { text: '资料库', link: '/resources/' },
-          { text: '贡献规范', link: '/contribute/' },
+          { text: '参与共建', link: '/contribute/' },
+          { text: '资料入口', link: '/resources/' },
           { text: '整理方法', link: '/about/methodology/' },
           { text: '免责声明', link: '/about/disclaimer/' }
         ]
@@ -135,8 +269,8 @@ export default defineConfig({
         ] }
       ],
       '/resources/': [
-        { text: '资料库', items: [
-          { text: '资料入口', link: '/resources/' },
+        { text: '资料入口', items: [
+          { text: '入口说明', link: '/resources/' },
           { text: '贡献规范', link: '/contribute/' }
         ] }
       ],
@@ -157,6 +291,9 @@ export default defineConfig({
     },
     lastUpdated: { text: '最后更新' },
     darkModeSwitchLabel: '外观',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式',
+    skipToContentLabel: '跳到正文',
     sidebarMenuLabel: '目录',
     returnToTopLabel: '返回顶部',
     externalLinkIcon: true,

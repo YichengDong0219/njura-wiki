@@ -2,8 +2,7 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import content from '../../data/content.json'
-import type { ContentDatabase } from '../../data/contracts'
-import ResearchCanvas from './ResearchCanvas.vue'
+import type { ContentDatabase, ResearchLoopStageId } from '../../data/contracts'
 
 const props = defineProps<{ domainId: string }>()
 const data = content as ContentDatabase
@@ -12,6 +11,15 @@ const people = computed(() => {
   const domainId = domain.value?.id
   return domainId ? data.faculty.filter((person) => person.domainIds.includes(domainId)) : []
 })
+
+const stageLabels: Record<ResearchLoopStageId, string> = {
+  perception: '感知',
+  planning: '规划',
+  control: '控制',
+  execution: '执行',
+  feedback: '状态反馈'
+}
+const stageIds = Object.keys(stageLabels) as ResearchLoopStageId[]
 </script>
 
 <template>
@@ -21,12 +29,24 @@ const people = computed(() => {
     </nav>
     <header class="domain-detail__header">
       <div>
-        <p class="section-kicker">EDITORIAL RESEARCH NAVIGATION</p>
+        <p class="section-kicker">研究方向 · 编辑性整理</p>
         <h1>{{ domain.label }}</h1>
         <p class="domain-detail__english">{{ domain.english }}</p>
         <p>{{ domain.summary }}</p>
       </div>
-      <ResearchCanvas :kind="domain.animation" :label="domain.label" />
+      <div class="domain-stage-map" :aria-label="`${domain.label}关联的机器人反馈环环节`">
+        <div class="domain-stage-map__loop" aria-hidden="true"><i /><i /></div>
+        <p>在反馈环中的主要位置</p>
+        <ul>
+          <li
+            v-for="stageId in stageIds"
+            :key="stageId"
+            :class="{ 'is-active': domain.atlas.stageIds.includes(stageId) }"
+          >
+            <span aria-hidden="true" />{{ stageLabels[stageId] }}
+          </li>
+        </ul>
+      </div>
     </header>
 
     <div class="source-note">

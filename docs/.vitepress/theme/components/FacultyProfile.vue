@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import content from '../../data/content.json'
-import type { ContentDatabase } from '../../data/contracts'
+import type { ContentDatabase, SourceLink } from '../../data/contracts'
 
 const props = defineProps<{ facultyId: string }>()
 const data = content as ContentDatabase
@@ -10,6 +10,14 @@ const person = computed(() => data.faculty.find((item) => item.id === props.facu
 
 function domainInfo(domainId: string) {
   return data.editorialDomains.find((domain) => domain.id === domainId)
+}
+
+const sourceKindLabels: Record<SourceLink['kind'], string> = {
+  official: '学院官网',
+  personal: '个人主页',
+  dblp: 'DBLP',
+  scholar: '学术档案',
+  paper: '论文'
 }
 </script>
 
@@ -20,7 +28,7 @@ function domainInfo(domainId: string) {
     </nav>
     <header class="profile-header">
       <div>
-        <p class="section-kicker">{{ person.role === 'faculty' ? 'FACULTY PROFILE' : 'RESEARCH STAFF PROFILE' }}</p>
+        <p class="section-kicker">{{ person.role === 'faculty' ? '教师档案' : '专职科研人员档案' }}</p>
         <h1>{{ person.name }}</h1>
         <p>{{ person.title }}</p>
       </div>
@@ -53,7 +61,7 @@ function domainInfo(domainId: string) {
       <ul class="source-link-list">
         <li v-for="link in person.links" :key="link.url">
           <a :href="link.url" target="_blank" rel="noreferrer">{{ link.label }} <span aria-hidden="true">↗</span></a>
-          <span>{{ link.kind }}</span>
+          <span>{{ sourceKindLabels[link.kind] }}</span>
         </li>
       </ul>
       <p class="muted-copy">Google Scholar 仅收录教师本人主页明确链接的档案，不抓取引用量，也不以姓名自动匹配。</p>

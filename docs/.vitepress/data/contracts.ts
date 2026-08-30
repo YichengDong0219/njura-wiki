@@ -6,6 +6,21 @@ export type ResearchDomainId =
   | 'industry'
   | 'equipment'
 
+export type ResearchLoopStageId =
+  | 'perception'
+  | 'planning'
+  | 'control'
+  | 'execution'
+  | 'feedback'
+
+export type ResearchAtlasIcon =
+  | 'learning'
+  | 'route'
+  | 'shield'
+  | 'prediction'
+  | 'pulse'
+  | 'joint'
+
 export interface SourceLink {
   label: string
   url: string
@@ -34,7 +49,6 @@ export interface CourseEntry {
   credits: number | null
   assessment: string
   officialSource: string
-  resourceLinks: Array<{ label: string; url: string }>
   detailPath?: string
   experienceStatus: '暂无投稿' | '已有投稿'
   lastVerified: string
@@ -96,7 +110,11 @@ export interface EditorialDomain {
   english: string
   summary: string
   tags: string[]
-  animation: 'loop' | 'path' | 'barrier' | 'horizon' | 'health' | 'joint'
+  atlas: {
+    order: number
+    icon: ResearchAtlasIcon
+    stageIds: ResearchLoopStageId[]
+  }
 }
 
 export interface ContentDatabase {

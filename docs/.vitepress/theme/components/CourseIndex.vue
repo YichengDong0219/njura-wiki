@@ -8,7 +8,7 @@ const data = content as ContentDatabase
 
 <template>
   <div class="course-grid">
-    <article v-for="course in data.courses" :key="course.id" class="course-card">
+    <article v-for="course in data.courses" :id="`course-${course.id}`" :key="course.id" class="course-card">
       <div class="course-card__code">{{ course.courseCode }}</div>
       <h2>
         <a v-if="course.detailPath" class="course-card__title-link" :href="withBase(course.detailPath)">{{ course.name }}</a>

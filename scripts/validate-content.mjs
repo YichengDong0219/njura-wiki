@@ -8,8 +8,8 @@ const data = JSON.parse(readFileSync(dataPath, 'utf8'))
 const courseOutlinesPath = join(projectRoot, 'docs/.vitepress/data/course-outlines.json')
 const courseOutlines = JSON.parse(readFileSync(courseOutlinesPath, 'utf8'))
 const errors = []
-const resourceRepositoryUrl = 'https://github.com/YichengDong0219/njura-resources'
 const forbiddenResourceExtension = /\.(?:pdf|pptx?|docx?)(?:$|[?#])/i
+const forbiddenCourseResourceKeys = ['resourceLinks', 'resourceUrl', 'downloadUrl', 'fileUrl', 'fileName', 'storageKey']
 
 function assert(condition, message) {
   if (!condition) errors.push(message)
@@ -33,9 +33,12 @@ function assertUnique(records, label) {
 }
 
 const domainIds = new Set(data.editorialDomains.map((domain) => domain.id))
+const atlasIcons = new Set(['learning', 'route', 'shield', 'prediction', 'pulse', 'joint'])
+const loopStages = new Set(['perception', 'planning', 'control', 'execution', 'feedback'])
 assert(data.officialDomains.length === 4, '学院公开研究域必须为 4 个')
 assert(data.editorialDomains.length === 6, '编辑性研究方向必须为 6 个')
 assertUnique(data.editorialDomains, '研究方向')
+assert(data.editorialDomains.map((domain) => domain.atlas?.order).sort().join(',') === '1,2,3,4,5,6', '研究图谱顺序必须为唯一的 1–6')
 assertUnique(data.faculty, '人员')
 assertUnique(data.courses, '课程')
 assertUnique(data.projects, '项目')
@@ -58,7 +61,12 @@ for (const domain of data.officialDomains) {
 for (const domain of data.editorialDomains) {
   assert(domain.label && domain.english && domain.summary, `${domain.id} 方向字段不完整`)
   assert(Array.isArray(domain.tags) && domain.tags.length >= 4, `${domain.label} 至少需要 4 个二级标签`)
-  assert(['loop', 'path', 'barrier', 'horizon', 'health', 'joint'].includes(domain.animation), `${domain.label} 动画类型无效`)
+  assert(atlasIcons.has(domain.atlas?.icon), `${domain.label} 的图谱图标无效`)
+  assert(Array.isArray(domain.atlas?.stageIds) && domain.atlas.stageIds.length > 0, `${domain.label} 缺少反馈环位置`)
+  assert(new Set(domain.atlas?.stageIds).size === domain.atlas?.stageIds.length, `${domain.label} 的反馈环位置不得重复`)
+  for (const stageId of domain.atlas?.stageIds ?? []) {
+    assert(loopStages.has(stageId), `${domain.label} 引用了未知反馈环位置 ${stageId}`)
+  }
   const directionPage = join(projectRoot, `docs/research/directions/${domain.id}/index.md`)
   assert(existsSync(directionPage), `${domain.label} 缺少方向详情页`)
   assert(data.faculty.some((person) => person.domainIds.includes(domain.id)), `${domain.label} 没有关联人员`)
@@ -79,18 +87,16 @@ for (const course of data.courses) {
   assert(course.courseCode && course.name && course.term, `课程字段不完整：${course.id}`)
   assert(Array.isArray(course.instructors) && course.instructors.length > 0, `${course.name} 缺少教师`)
   assert(isHttpsUrl(course.officialSource), `${course.name} 缺少有效官方来源`)
-  assert(Array.isArray(course.resourceLinks), `${course.name} 的资料链接必须为数组`)
-  for (const link of course.resourceLinks ?? []) {
-    assert(link.label && isHttpsUrl(link.url), `${course.name} 包含无效资料链接`)
-    assert(!forbiddenResourceExtension.test(link.url), `${course.name} 不得直接链接课程文件：${link.url}`)
+  for (const key of forbiddenCourseResourceKeys) {
+    assert(!Object.hasOwn(course, key), `${course.name} 不得在课程事实数据中配置 ${key}`)
   }
+  const { officialSource: _officialSource, ...courseWithoutOfficialSource } = course
+  assert(!forbiddenResourceExtension.test(JSON.stringify(courseWithoutOfficialSource)), `${course.name} 不得包含课程文件路径`)
   if (course.detailPath) {
     const detailDirectory = course.detailPath.replace(/^\/+|\/+$/g, '')
     assert(course.detailPath.startsWith('/courses/') && course.detailPath.endsWith('/'), `${course.name} 的详情路径无效`)
     assert(course.detailPath === `/courses/${course.id}/`, `${course.name} 的课程 ID 必须与详情路由一致`)
     assert(existsSync(join(projectRoot, 'docs', detailDirectory, 'index.md')), `${course.name} 缺少课程详情页`)
-    assert(course.resourceLinks.length === 1, `${course.name} 必须且只能配置一个资料库入口`)
-    assert(course.resourceLinks[0]?.url === resourceRepositoryUrl, `${course.name} 的资料入口必须指向指定仓库`)
     assert(courseOutlines.some((outline) => outline.courseId === course.id), `${course.name} 缺少课程知识地图`)
   }
   assert(['暂无投稿', '已有投稿'].includes(course.experienceStatus), `${course.name} 的经验状态无效`)

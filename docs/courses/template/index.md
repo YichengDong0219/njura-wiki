@@ -16,7 +16,6 @@ instructors:
 credits: 学分；未知可写 null
 assessment: 考核构成与来源
 officialSource: URL
-resourceLinks: []
 experienceStatus: 暂无投稿 | 已有投稿
 lastVerified: YYYY-MM-DD
 ```

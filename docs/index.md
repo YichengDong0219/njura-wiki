@@ -6,49 +6,31 @@ comment: false
 
 hero:
   name: 南大机器人学生 Wiki
-  text: Robotics × Automation × Intelligence
-  tagline: 面向南京大学机器人与自动化学院学生的非官方知识站——从课程、师资与科研方向，走向真实的学习与实践路径。
+  text: 课程、老师、项目，一处查清
+  tagline: 这里整理课程、教师研究方向和学生项目。当前收录 29 位人员、6 类方向、2 门课程；学生经验仍在征集。
   actions:
     - theme: brand
-      text: 探索研究图谱
-      link: /research/map/
+      text: 查课程
+      link: /courses/
     - theme: alt
-      text: 参与共建
-      link: /contribute/
-
-features:
-  - icon: 🧭
-    title: 项目介绍
-    details: 学生实践、大创竞赛、开源协作与学院科研项目。
-    link: /projects/
-  - icon: ⎈
-    title: 课程介绍
-    details: 课程信息、资料索引与可核验的学生经验。
-    link: /courses/
-  - icon: ◌
-    title: 师资百科
-    details: 25 个教师档案与 4 位专职科研人员的方向导航。
-    link: /faculty/
-  - icon: ⌁
-    title: 科研指南
-    details: 找方向、读论文、联系导师与进入实验室的方法。
-    link: /research/
-  - icon: ✦
-    title: 学法分享
-    details: 培养方案、学习路径、工具链与同学经验。
-    link: /learning/
+      text: 按方向找老师
+      link: /research/map/
 ---
+
+<HomePortal />
+
+<HomeCoverage />
 
 <ResearchPreview />
 
 <section class="home-contribute" aria-labelledby="home-contribute-title">
   <div>
-    <p class="section-kicker">BUILT BY STUDENTS</p>
-    <h2 id="home-contribute-title">把个人经验，变成下一届同学的路标</h2>
-    <p>纠错、课程笔记、项目复盘和学法文章都通过 GitHub 留痕审核；没有证据的评价不会被写成事实。</p>
+    <p class="section-kicker">一起补全</p>
+    <h2 id="home-contribute-title">发现错误，或者正好知道一条缺失信息？</h2>
+    <p>可以补一门课、一次项目经历或一条纠错。事实信息附上来源，个人经验注明适用学期即可。</p>
   </div>
   <div class="home-contribute__actions">
-    <a href="./contribute/">查看贡献规范</a>
-    <a href="https://github.com/YichengDong0219/njura-wiki/issues" target="_blank" rel="noreferrer">提交 Issue ↗</a>
+    <a href="./contribute/">参与共建</a>
+    <a href="https://github.com/YichengDong0219/njura-wiki/issues" target="_blank" rel="noreferrer">报告问题 ↗</a>
   </div>
 </section>
