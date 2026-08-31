@@ -55,7 +55,8 @@ onMounted(() => {
       <div>
         <p class="section-kicker">研究方向</p>
         <component :is="compact ? 'h2' : 'h1'" id="research-atlas-title">
-          从研究问题出发，再去找老师
+          <span class="atlas-header__title-line">从研究问题出发，</span>
+          <span class="atlas-header__title-line">再去找老师</span>
         </component>
       </div>
       <p>
