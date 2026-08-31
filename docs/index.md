@@ -31,6 +31,6 @@ hero:
   </div>
   <div class="home-contribute__actions">
     <a href="./contribute/">参与共建</a>
-    <a href="https://github.com/YichengDong0219/njura-wiki/issues" target="_blank" rel="noreferrer">报告问题 ↗</a>
+    <a href="https://github.com/YichengDong0219/njura-wiki/issues" target="_blank" rel="noreferrer">报告问题</a>
   </div>
 </section>

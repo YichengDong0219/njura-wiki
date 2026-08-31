@@ -60,7 +60,7 @@ const sourceKindLabels: Record<SourceLink['kind'], string> = {
       <h2>核验来源</h2>
       <ul class="source-link-list">
         <li v-for="link in person.links" :key="link.url">
-          <a :href="link.url" target="_blank" rel="noreferrer">{{ link.label }} <span aria-hidden="true">↗</span></a>
+          <a :href="link.url" target="_blank" rel="noreferrer">{{ link.label }}</a>
           <span>{{ sourceKindLabels[link.kind] }}</span>
         </li>
       </ul>

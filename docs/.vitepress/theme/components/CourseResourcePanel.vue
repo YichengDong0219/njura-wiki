@@ -61,7 +61,7 @@ onMounted(async () => {
 
     <div v-else-if="state === 'empty'" class="course-resource-empty" aria-live="polite">
       <p>后续会在这里汇总获授权的课件、笔记和文档。当前没有可浏览的资料条目，也不会跳转到外部文件。</p>
-      <a :href="withBase('/contribute/')">了解如何贡献 <span aria-hidden="true">→</span></a>
+      <a :href="withBase('/contribute/')">了解如何贡献 <span class="action-icon" aria-hidden="true">→</span></a>
     </div>
 
     <div v-else-if="state === 'error'" class="course-resource-empty course-resource-empty--error" role="alert">

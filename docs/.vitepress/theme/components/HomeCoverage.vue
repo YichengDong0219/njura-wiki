@@ -36,7 +36,7 @@ const lastVerified = computed(() => {
         <li>学生修课经验</li>
         <li>更多项目与竞赛记录</li>
       </ul>
-      <a :href="withBase('/contribute/')">认领一项待补内容 <span aria-hidden="true">→</span></a>
+      <a :href="withBase('/contribute/')">认领一项待补内容 <span class="action-icon" aria-hidden="true">→</span></a>
     </div>
   </section>
 </template>

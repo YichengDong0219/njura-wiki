@@ -65,7 +65,7 @@ const entries = [
           <strong>{{ entry.title }}</strong>
           <span>{{ entry.description }}</span>
         </span>
-        <span class="home-portal-card__arrow" aria-hidden="true">→</span>
+        <span class="home-portal-card__arrow action-icon" aria-hidden="true">→</span>
       </a>
     </nav>
   </section>

@@ -68,7 +68,7 @@ function profilePath(person: FacultyRecord) {
           <ul class="tag-list">
             <li v-for="domainId in person.domainIds" :key="domainId">{{ domainLabel(domainId) }}</li>
           </ul>
-          <a class="card-detail-link" :href="profilePath(person)">查看档案与来源 <span aria-hidden="true">→</span></a>
+          <a class="card-detail-link" :href="profilePath(person)">查看档案与来源 <span class="action-icon" aria-hidden="true">→</span></a>
         </article>
       </div>
     </section>
@@ -93,7 +93,7 @@ function profilePath(person: FacultyRecord) {
           <ul class="tag-list">
             <li v-for="domainId in person.domainIds" :key="domainId">{{ domainLabel(domainId) }}</li>
           </ul>
-          <a class="card-detail-link" :href="profilePath(person)">查看档案与来源 <span aria-hidden="true">→</span></a>
+          <a class="card-detail-link" :href="profilePath(person)">查看档案与来源 <span class="action-icon" aria-hidden="true">→</span></a>
         </article>
       </div>
     </section>

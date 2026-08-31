@@ -23,8 +23,8 @@ const projects = computed(() => data.projects.filter((project) => project.kind =
         <div><dt>参与条件</dt><dd>{{ project.participation }}</dd></div>
       </dl>
       <div class="project-card__links">
-        <a :href="project.source" target="_blank" rel="noreferrer">学院公开来源 ↗</a>
-        <a v-if="project.paperUrl" :href="project.paperUrl" target="_blank" rel="noreferrer">论文 DOI ↗</a>
+        <a :href="project.source" target="_blank" rel="noreferrer">学院公开来源</a>
+        <a v-if="project.paperUrl" :href="project.paperUrl" target="_blank" rel="noreferrer">论文 DOI</a>
       </div>
       <p class="verified-date">最后核验：{{ project.lastVerified }}</p>
     </article>

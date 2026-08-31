@@ -73,7 +73,7 @@ onMounted(() => {
         target="_blank"
         rel="noreferrer"
       >
-        {{ domain.name }} <span aria-hidden="true">↗</span>
+        {{ domain.name }}
       </a>
     </div>
 
@@ -160,7 +160,7 @@ onMounted(() => {
         </div>
 
         <a class="atlas-primary-link" :href="withBase(`/research/directions/${activeDomain.id}/`)">
-          查看方向详情与全部人员 <span aria-hidden="true">→</span>
+          查看方向详情与全部人员 <span class="action-icon" aria-hidden="true">→</span>
         </a>
       </article>
     </div>
@@ -168,7 +168,7 @@ onMounted(() => {
     <footer v-if="compact" class="atlas-footer">
       <p>四个上位研究域来自学院简介；六类方向是学生 Wiki 的编辑性整理。</p>
       <a class="atlas-primary-link" :href="withBase(`/research/map/?direction=${activeDomain.id}`)">
-        打开完整研究图谱 <span aria-hidden="true">→</span>
+        打开完整研究图谱 <span class="action-icon" aria-hidden="true">→</span>
       </a>
     </footer>
   </section>

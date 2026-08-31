@@ -20,6 +20,8 @@
   --njura-ink: #0a0c18;
   --njura-surface: rgba(255, 255, 255, 0.72);
   --njura-surface-strong: #ffffff;
+  --njura-control-height: 40px;
+  --njura-control-line-height: 1.2;
 }
 
 .dark {
@@ -81,7 +83,7 @@ body {
 }
 
 .VPHero .VPButton.brand {
-  border: 0;
+  border-color: transparent;
   background: linear-gradient(110deg, #6644b8, #0f7d8f);
   box-shadow: 0 14px 38px -22px color-mix(in srgb, var(--njura-cyan) 72%, transparent);
 }
@@ -373,7 +375,7 @@ body {
   gap: 10px;
   align-items: center;
   width: 166px;
-  min-height: 62px;
+  height: 62px;
   padding: 10px 12px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 16px;
@@ -402,9 +404,9 @@ body {
 .research-domain-node--industry { bottom: 7%; left: 8%; animation-delay: 320ms; }
 .research-domain-node--equipment { top: calc(50% - 31px); left: 1.5%; animation-delay: 380ms; }
 
-.research-domain-node > span:last-child { display: flex; min-width: 0; flex-direction: column; }
-.research-domain-node small { color: var(--njura-cyan); font-size: .6rem; font-weight: 800; letter-spacing: .09em; }
-.research-domain-node strong { margin-top: 1px; overflow: hidden; font-size: .8rem; text-overflow: ellipsis; white-space: nowrap; }
+.research-domain-node > span:last-child { display: flex; min-width: 0; flex-direction: column; justify-content: center; }
+.research-domain-node small { color: var(--njura-cyan); font-size: .6rem; font-weight: 800; line-height: 1; letter-spacing: .09em; }
+.research-domain-node strong { margin-top: 3px; overflow: hidden; font-size: .8rem; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
 
 .research-domain-node__icon {
   position: relative;
@@ -1036,6 +1038,50 @@ body {
 .not-found-page p:not(.section-kicker) { color: var(--vp-c-text-2); }
 .not-found-page a { display: inline-flex; margin-top: 12px; padding: 11px 17px; border-radius: 999px; color: white; background: linear-gradient(110deg, #6644b8, #0f7d8f); text-decoration: none; font-weight: 700; }
 
+/* Button labels use a shared box model instead of font-dependent line-height centering. */
+.VPHero .VPButton,
+.course-card__detail-link,
+.home-contribute__actions a,
+.not-found-page a,
+.VPContent .NotFound .link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--njura-control-height);
+  padding-block: 0;
+  line-height: var(--njura-control-line-height);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.VPHero .actions { align-items: center; }
+.VPHero .action { display: flex; }
+.VPHome .VPHero .VPButton.medium { line-height: var(--njura-control-line-height); }
+
+.card-detail-link,
+.atlas-primary-link,
+.course-resource-empty a,
+.home-coverage__gaps a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.25;
+  vertical-align: middle;
+}
+
+.action-icon {
+  display: inline-grid;
+  flex: 0 0 1em;
+  width: 1em;
+  height: 1em;
+  place-items: center;
+  line-height: 1;
+}
+
+.VPNav .DocSearch-Button .DocSearch-Search-Icon { top: 0; }
+.VPNav .DocSearch-Button .DocSearch-Button-Placeholder,
+.VPNav .DocSearch-Button .DocSearch-Button-Key { margin-top: 0; }
+
 @media (max-width: 860px) {
   .hero-ambient { opacity: 0.48; }
   .atlas-header,
@@ -1088,7 +1134,7 @@ body {
     position: relative;
     inset: auto;
     width: auto;
-    min-height: 60px;
+    height: 62px;
     animation: none;
   }
   .atlas-detail { padding: 26px 20px 30px; }
